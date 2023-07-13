@@ -40,11 +40,9 @@
                 // Autenticação com a API do Google Sheets
                 gapi.load('client', function() {
                     gapi.client.init({
-                        apiKey: 'AIzaSyCHMPZksdka4_HtizQ6fkHTeuyMh5dyUHE',
-                       clientId: '456387488821-d0dk017bdji7qj72bnkjvqmqshv87c4e.apps.googleusercontent.com',
-                      clientSecret: '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',
-                      tokenUri: 'https://oauth2.googleapis.com/token'
                         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+                        clientId: '456387488821-d0dk017bdji7qj72bnkjvqmqshv87c4e.apps.googleusercontent.com',
+                        scope: 'https://www.googleapis.com/auth/spreadsheets'
                     }).then(function() {
                         // Enviar dados para a planilha
                         gapi.client.sheets.spreadsheets.values.append({
@@ -52,9 +50,9 @@
                             range: '1cveRHwOvwwvZZW3wTef_VcN7A4qSI2kpd04sG8dhYpY!A2:C2',
                             valueInputOption: 'USER_ENTERED',
                             resource: data
-                         }).then(function(response) {
+                        }).then(alert(response) {
                             alert('Resposta enviada com sucesso para o Google Sheets!');
-                        }, function(error) {
+                        }, alert(error) {
                             alert('Erro ao enviar resposta: ' + error.result.error.message);
                         });
                     });
@@ -64,24 +62,5 @@
     </script>
 
     <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function handleClientLoad() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'AIzaSyCHMPZksdka4_HtizQ6fkHTeuyMh5dyUHE',
-                clientId: '456387488821-d0dk017bdji7qj72bnkjvqmqshv87c4e.apps.googleusercontent.com',
-                discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-                scope: 'https://www.googleapis.com/auth/spreadsheets',
-            }).then(function() {
-                gapi.auth2.getAuthInstance().signIn();
-            });
-        }
-
-        // Inicializar a autenticação quando a página for carregada
-        handleClientLoad();
-    </script>
 </body>
 </html>
