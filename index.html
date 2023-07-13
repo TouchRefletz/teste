@@ -44,16 +44,18 @@
                         clientId: '456387488821-d0dk017bdji7qj72bnkjvqmqshv87c4e.apps.googleusercontent.com',
                         scope: 'https://www.googleapis.com/auth/spreadsheets'
                     }).then(function() {
-                        // Enviar dados para a planilha
-                        gapi.client.sheets.spreadsheets.values.append({
-                            spreadsheetId: '1cveRHwOvwwvZZW3wTef_VcN7A4qSI2kpd04sG8dhYpY',
-                            range: '1cveRHwOvwwvZZW3wTef_VcN7A4qSI2kpd04sG8dhYpY!A2:C2',
-                            valueInputOption: 'USER_ENTERED',
-                            resource: data
-                        }).then(alert(response) {
-                            alert('Resposta enviada com sucesso para o Google Sheets!');
-                        }, alert(error) {
-                            alert('Erro ao enviar resposta: ' + error.result.error.message);
+                        gapi.auth2.getAuthInstance().signIn().then(function() {
+                            // Enviar dados para a planilha
+                            gapi.client.sheets.spreadsheets.values.append({
+                                spreadsheetId: '1cveRHwOvwwvZZW3wTef_VcN7A4qSI2kpd04sG8dhYpY',
+                                range: '1cveRHwOvwwvZZW3wTef_VcN7A4qSI2kpd04sG8dhYpY!A2:C2',
+                                valueInputOption: 'USER_ENTERED',
+                                resource: data
+                            }).then(function(response) {
+                                alert('Resposta enviada com sucesso para o Google Sheets!');
+                            }, function(error) {
+                                alert('Erro ao enviar resposta: ' + error.result.error.message);
+                            });
                         });
                     });
                 });
